@@ -15,7 +15,7 @@ from datetime import date, datetime, time
 
 class Eventos():
 
-    # eventos generales del program
+    # eventos generales del programa
     def on_acercade_activate(self, widget):
         """
         Abre la ventana Acerca de
