@@ -37,13 +37,14 @@ def basico(pdf):
         print('Error en basico')
 
 
-def factura(datos_factura):
+def factura(datosfactura):
     """
     Se insertan todos los tipos de datos dentro de la factura
     :param datos_factura: Lista que contiene todos los datos de la factura
     :return: Void
     """
     try:
+
         pdf = canvas.Canvas('factura.pdf', pagesize=A4)
         factura = basico(pdf)
         factura.setTitle('FACTURA')
@@ -52,30 +53,29 @@ def factura(datos_factura):
         numero_factura = 'Número de Factura:'
         factura.drawString(50, 735, numero_factura)
         factura.setFont('Helvetica', size=8)
-        factura.drawString(140, 735, str(datos_factura[0]))
+        factura.drawString(140, 735, str(datosfactura[0]))
 
         factura.setFont('Helvetica-Bold', size=8)
         fecha_factura = 'Fecha Factura:'
         factura.drawString(300, 735, fecha_factura)
         factura.setFont('Helvetica', size=8)
-        factura.drawString(360, 735, str(datos_factura[4]))
+        factura.drawString(360, 735, str(datosfactura[4]))
 
         factura.setFont('Helvetica-Bold', size=8)
         dni_cliente = 'DNI CLIENTE:'
         factura.drawString(50, 710, dni_cliente)
         factura.setFont('Helvetica', size=8)
-        factura.drawString(120, 710, str(datos_factura[2]))
+        factura.drawString(120, 710, str(datosfactura[2]))
 
         factura.setFont('Helvetica-Bold', size=8)
         numero_habitacion = 'Nº de Habitación:'
         factura.drawString(300, 710, numero_habitacion)
         factura.setFont('Helvetica', size=8)
-        factura.drawString(380, 710, str(datos_factura[3]))
-        nombre_y_apellidos = funcionescli.apelnomfac(datos_factura[2])
+        factura.drawString(380, 710, str(datosfactura[3]))
+        nombre_y_apellidos = funcionescli.apelnomfac(datosfactura[2])
 
         factura.setFont('Helvetica-Bold', size=8)
         apellidos_cliente = 'APELLIDOS:'
-
         factura.drawString(50, 680, apellidos_cliente)
         factura.setFont('Helvetica', size=8)
         factura.drawString(120, 680, nombre_y_apellidos[0])
@@ -85,7 +85,7 @@ def factura(datos_factura):
         factura.setFont('Helvetica', size=8)
         factura.drawString(350, 680, nombre_y_apellidos[1])
 
-        alojamiento = ['Noches', str(datos_factura[1]), str(datos_factura[5]),variables.strPrecioTotal]
+        alojamiento = ['Noches', str(datosfactura[1]), str(datosfactura[5]),variables.strPrecioTotal]
         cabecera = ['CONCEPTO', 'UNIDADES', 'PRECIO/UNIDAD', 'TOTAL']
 
         x = 75
@@ -145,9 +145,9 @@ def factura(datos_factura):
         factura.showPage()
         factura.save()
         directorio_actual = os.getcwd()
-        os.system('/usr/bin/xdg-open ' + directorio_actual + '/prueba.pdf')
+        os.system('/usr/bin/xdg-open ' + directorio_actual + '/factura.pdf')
     except Exception as e:
-        print(e)
+        print(str(e))
         print('Error en factura')
 
 def clientes(listclientes):
@@ -166,7 +166,7 @@ def clientes(listclientes):
         y = 620
         for registro in listclientes:
             x = 75
-            if y <= 50:
+            if y <= 80:
                 y = 780
                 pdf.showPage()
                 page_num = factura.getPageNumber()

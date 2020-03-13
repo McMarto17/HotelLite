@@ -374,7 +374,8 @@ class Eventos():
                 funcioneshab.listadohab(variables.listhab)
                 funcioneshab.limpiarentry(variables.filahab)
             else:
-                print('falta el numhab')
+                variables.vError.show()
+                variables.lblMensajeVentanaError.set_text("Falta el número de habitación")
         except:
             print('error modif hab')
 
@@ -531,7 +532,8 @@ class Eventos():
                     funcioneshab.limpiarentry(variables.filahab)
                     funcionesreser.limpiarentry(variables.filareserva)
                 else:
-                    print('habitación ocupada')
+                    variables.vError.show()
+                    variables.lblMensajeVentanaError.set_text("Habitación Acabada")
         except:
             print('error en alta res')
 
@@ -592,6 +594,7 @@ class Eventos():
                 variables.lblHabitacionServicio.set_text(str(snumhab))
                 global datosfactura
                 datosfactura = (variables.codr, snoches, sdni, snumhab, schko, str(variables.precioUnidad[0]))
+                print(datosfactura)
                 funcionesServicios.listadoServicio(variables.listaServicios, variables.codr)
 
                 funcionesServicios.calcularPrecioServicios()
@@ -847,7 +850,8 @@ class Eventos():
                     filaDesayuno = (codigoReserva,conceptoDesayuno,precioDesayuno)
                     funcionesServicios.insertarServicio(filaDesayuno)
                 else:
-                    print("Ya hay un servicio Desayuno")
+                    variables.vError.show()
+                    variables.lblMensajeVentanaError.set_text("Ya existe un servicio de desayuno")
 
             elif(variables.rbComida.get_active()):
                 existeComida = False
@@ -860,7 +864,8 @@ class Eventos():
                     filaComida = (codigoReserva, conceptoComida, precioComida)
                     funcionesServicios.insertarServicio(filaComida)
                 else:
-                    print("Ya hay un servicio Comida")
+                    variables.vError.show()
+                    variables.lblMensajeVentanaError.set_text("Ya existe un servicio de comida")
 
             if(variables.chkParking.get_active()):
                 existeParking = False
@@ -873,7 +878,8 @@ class Eventos():
                     filaParking = (codigoReserva, conceptoParking, precioParking)
                     funcionesServicios.insertarServicio(filaParking)
                 else:
-                    print("Ya hay un servicio de Parking")
+                    variables.vError.show()
+                    variables.lblMensajeVentanaError.set_text("Ya existe un servicio de Parking")
 
             funcionesServicios.listadoServicio(variables.listaServicios,codigoReserva)
             funcionesServicios.calcularPrecioServicios()
@@ -905,7 +911,8 @@ class Eventos():
                 variables.entradaTipoServicio.set_text("")
                 variables.entradaPrecioServicio.set_text("")
             else:
-                print("Ya existe ese Servicio")
+                variables.vError.show()
+                variables.lblMensajeVentanaError.set_text("Ya existe ese servicio")
                 variables.entradaTipoServicio.set_text("")
                 variables.entradaPrecioServicio.set_text("")
         except Exception as e:
@@ -938,3 +945,10 @@ class Eventos():
         except Exception as e:
             print(e)
             print("error carga servicios")
+
+    def on_btnSalirVentanaError_clicked(self, widget):
+        try:
+            variables.vError.connect('delete-event', lambda w, e: w.hide() or True)
+            variables.vError.hide()
+        except:
+            print('error cerrar la ventana de error')

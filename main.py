@@ -31,7 +31,6 @@ class Empresa:
         variables.ventanaImportar = self.b.get_object('ventanaImportar')
         variables.ventanaExportar = self.b.get_object('ventanaExportar')
 
-
         menubar = self.b.get_object('menuBar').get_style_context()
 
         #declaracion de wigdets
@@ -109,6 +108,9 @@ class Empresa:
         variables.entradaTipoServicio = self.b.get_object('entradaTipoServicio')
         variables.entradaPrecioServicio = self.b.get_object('entradaPrecioServicio')
 
+        #parte de ventana de error
+        variables.vError = self.b.get_object('vError')
+        variables.lblMensajeVentanaError = self.b.get_object('lblMensajeVentanaError')
 
         #conectamos
         self.b.connect_signals(eventos.Eventos())

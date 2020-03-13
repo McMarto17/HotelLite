@@ -77,3 +77,8 @@ lblPrecioFacturacion = None
 lblSubtotalFactura = None
 lblIvaFactura = None
 lblTotalFactura = None
+
+#varaible para la ventana de error
+vError = None
+lblMensajeVentanaError = None
+
